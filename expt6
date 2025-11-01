@@ -1,0 +1,71 @@
+import java.util.*;
+
+public class TwoLevelMemoryHierarchy {
+    static double avgCost(double[] c, double[] s) {
+        return (c[0]*s[0] + c[1]*s[1]) / (s[0] + s[1]);
+    }
+
+    static double avgTime(double[] h, double[] t) {
+        return h[0]*t[0] + (1-h[0])*h[1]*t[1];
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        double[] c = new double[2], s = new double[2], h = new double[2], t = new double[2];
+
+        System.out.println("Analysis of Two-Level Memory Hierarchy");
+        for (int i = 0; i < 2; i++) {
+            int l = i + 1;
+            System.out.printf("---- Level %d ----%n", l);
+            System.out.printf("Enter cost/bit C%d (INR): ", l);  c[i] = sc.nextDouble();
+            System.out.printf("Enter size S%d (bits): ", l);     s[i] = sc.nextDouble();
+            System.out.printf("Enter hit rate H%d (0 to 1): ", l); h[i] = sc.nextDouble();
+            System.out.printf("Enter access time ta%d (microseconds): ", l); t[i] = sc.nextDouble();
+        }
+        sc.close();
+
+        System.out.println("\n===== Results =====");
+        System.out.printf("Average cost per bit (INR) = %.6f%n", avgCost(c, s));
+        System.out.printf("Average access time (microseconds) = %.4f%n", avgTime(h, t));
+    }
+}
+
+Three 
+import java.util.*;
+
+public class ThreeLevelMemoryHierarchy {
+    static double avgCost(double[] c, double[] s) {
+        return (c[0]*s[0] + c[1]*s[1] + c[2]*s[2]) / (s[0] + s[1] + s[2]);
+    }
+
+    static double avgTime(double[] h, double[] t) {
+        double miss = 1, tav = 0;
+        for (int i = 0; i < 3; i++) {
+            tav += miss * h[i] * t[i];
+            miss *= (1 - h[i]);
+        }
+        return tav;
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        double[] c = new double[3], s = new double[3], h = new double[3], t = new double[3];
+
+        System.out.println("Analysis of Three-Level Memory Hierarchy");
+        for (int i = 0; i < 3; i++) {
+            int l = i + 1;
+            System.out.printf("---- Level %d ----%n", l);
+            System.out.printf("Enter cost/bit C%d (INR): ", l);  c[i] = sc.nextDouble();
+            System.out.printf("Enter size S%d (bits): ", l);     s[i] = sc.nextDouble();
+            System.out.printf("Enter hit rate H%d (0 to 1): ", l); h[i] = sc.nextDouble();
+            System.out.printf("Enter access time ta%d (microseconds): ", l); t[i] = sc.nextDouble();
+        }
+        sc.close();
+
+        System.out.println("\n===== Results =====");
+        System.out.printf("Average cost per bit (INR) = %.6f%n", avgCost(c, s));
+        System.out.printf("Average access time (microseconds) = %.4f%n", avgTime(h, t));
+    }
+}
+
+
